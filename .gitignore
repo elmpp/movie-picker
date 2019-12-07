@@ -10,6 +10,10 @@ npm-debug.*
 web-build/
 web-report/
 
+// --------- added by me ----
+yarn-error.log
+// --------- EOF added by me ----
+
 # macOS
 .DS_Store
 

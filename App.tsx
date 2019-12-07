@@ -1,19 +1,30 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Native entrypoint component.
+ */
+import React from "react";
+// import { createAppContainer } from "react-navigation";
+// import { createStackNavigator } from "react-navigation-stack";
+// import { HomeScreen } from "./components/screens";
+// import { Linking } from "expo";
+import {AppContainer} from './navigation/app-container'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+// const prefix = Linking.makeUrl("/"); // syncs RN link scheme with expo
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const AppContainer = createAppContainer(
+//   createStackNavigator(
+//     {
+//       home: {
+//         screen: HomeScreen
+//       }
+//     },
+//     {
+//       initialRouteKey: "home"
+//     }
+//   )
+// );
+
+// export default () => {
+//   return <AppContainer uriPrefix={prefix} />;
+// };
+
+export default () => (<AppContainer />)
