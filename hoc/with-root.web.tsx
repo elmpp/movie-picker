@@ -12,7 +12,8 @@ export const withRoot = (options: Options = {}) => <OriginalProps extends {}>(
   Component: React.ComponentType<OriginalProps & InjectedProps>,
 ) => {
   const WithRootHOC: React.FC<OriginalProps & ExternalProps> = (...props) => {
-    return <PaperProvider {...options.reactNativePaperProps}><Component {...props} /></PaperProvider>
+    // return <PaperProvider {...options.reactNativePaperProps}><Component {...props} /></PaperProvider>
+    return <Component {...props} />
   }
 
   if (process.env.NODE_ENV !== 'production') {

@@ -20,6 +20,7 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
+- [Libraries](#libraries)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -31,7 +32,12 @@ As you'll quickly notice have gone with a managed expo project here as time is o
 the essence and there's to be no funky low-level stuff. Also, honestly, it's
 a chance to see how expo's react-native-web integration has been going.
 
+- git checkout -> `yarn install`
+- For mobile: `yarn start` (usual managed expo options then arise)
+- For web: `yarn web` (Perhaps play around with the browser window as it's responsive)
 
+
+## 🏁 Libraries <a name = "libraries"></a>
 
 - [Expo](https://github.com/expo) - Scaffolding
 - [React-native-paper](https://callstack.github.io/react-native-paper/index.html) - Component library
