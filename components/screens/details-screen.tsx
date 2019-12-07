@@ -6,8 +6,8 @@ export const DetailsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>THIS IS THE DETAILS SCREEN</Text>
-      <Link toRoute="home">jump to home screen via component</Link>
-      <Text onPress={() => linker.navigate('home')}>jump to home screen imperatively</Text>
+      <Link routeName="home">jump to home screen via component</Link>
+      <Text onPress={() => linker.navigate({routeName: 'home'})}>jump to home screen imperatively</Text>
     </View>
   );
 };

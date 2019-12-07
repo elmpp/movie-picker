@@ -1,19 +1,22 @@
 /**
- * Web/Native require different navigators due to _things_
+ * Creates an "AppContainer" bootstrapped with all the react-navigation stuff ready
+ * To be used only in native platforms
  *
+ *  - latest expo instructions for nextjs setup - https://tinyurl.com/umtrama
  *  - react-navigation (RN) stackNavigator docs - https://tinyurl.com/von6vjg
+ *  - react-navigation/web docs - https://tinyurl.com/v429f4l
+ *  - react-navigation/web SSR example - https://tinyurl.com/yx2flg7o
  */
 
 import React from "react";
 import { createAppContainer } from "react-navigation";
-import { createBrowserApp } from "@react-navigation/web";
 import { createStackNavigator } from "react-navigation-stack";
-import { Platform } from "react-native";
 import { Linking } from "expo";
 import { HomeScreen } from "../components/screens";
 import { DetailsScreen } from "../components/screens/details-screen";
 import { setNavigatorRef } from "./linking";
 
+// note the keys here should match the /pages/ filenames
 const StackNavigator = createStackNavigator(
   {
     home: {
@@ -28,10 +31,7 @@ const StackNavigator = createStackNavigator(
   }
 );
 
-const createApp = Platform.select({
-  web: routes => createBrowserApp(routes, { history: "hash" }),
-  default: routes => createAppContainer(routes)
-});
+const createApp = (routes: any) => createAppContainer(routes)
 
 const NavigatorAppContainer = createApp(StackNavigator);
 

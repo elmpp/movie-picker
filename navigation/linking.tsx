@@ -1,18 +1,20 @@
 /**
- * We could have relied upon react-navigation supplying its navigation.navigate prop
- * to our "screens" to initiate navigation "events" but this would break down
- * when Next.js is resolving requests.
+ * Leans into react-navigation for its linking events.
+ * Metro will bundle this rather than sibling 'linking' module
+ *
+ * We could have relied upon react-navigation supplying its navigation prop
+ * to our "screens" to initiate navigation "events" but this wouldn't allow code reuse
+ * with nextjs 'pages'
  * Having a separate module and imperatively calling dispatch actions should mitigate this.
  */
 
 import React from 'react'
 import {
   NavigationActions,
-  NavigationParams,
   NavigationContainerComponent
 } from "react-navigation";
-import { Link as LinkWeb } from "@react-navigation/web";
-import { Platform, Text, TextProps } from "react-native";
+import { Linker, LinkComponent } from './__types__';
+import { TextProps, Text } from "react-native";
 
 let _navigator: NavigationContainerComponent;
 
@@ -20,36 +22,24 @@ export const setNavigatorRef = navigatorRef => {
   _navigator = navigatorRef;
 };
 
-const navigate = (routeName: string, params?: NavigationParams) => {
-  console.log('routeName :', routeName);
-  _navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
-      params
-    })
-  );
+export const linker: Linker = {
+  navigate: ({routeName, params}) => {
+    console.log('routeName :', routeName);
+    _navigator.dispatch(
+      NavigationActions.navigate({
+        routeName,
+        params,
+      })
+    )}
 };
 
-export const linker = {
-  navigate,
-  // goBack() {
-  //   _navigator.dispatch(NavigationActions.back({}));
-  // },
-  // setNavigatorRef
-};
-
-const LinkNative: React.FC<TextProps & {toRoute: string, params: NavigationParams}> = ({
+export const Link: LinkComponent<TextProps> = ({
   children,
-  toRoute,
+  routeName,
   params,
   ...otherProps
 }) => (
-  <Text {...otherProps} onPress={() => navigate(toRoute, params)}>
+  <Text {...otherProps} onPress={() => linker.navigate({ routeName, params })}>
     {children}
   </Text>
 );
-
-export const Link = Platform.select({
-  web: LinkWeb,
-  default: LinkNative,
-});

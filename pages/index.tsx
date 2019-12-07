@@ -1,22 +1,8 @@
-// @generated: @expo/next-adapter@2.0.0-beta.8
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {HomeScreen} from '../components/screens/home-screen'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Expo + Next.js 👋</Text>
-    </View>
-  );
-}
+const Home: React.FC = ({  }) => (
+  <HomeScreen />
+)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-  },
-});
+export default Home
