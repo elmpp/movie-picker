@@ -14,6 +14,8 @@ import {
   withTheme,
   Theme
 } from "react-native-paper";
+import {useResponsiveVal} from '../../hooks/useResponsiveVal'
+import { styleVars } from "../../style";
 
 const ThemedTitle = withTheme(
   ({ theme, ...props }: any) => {
@@ -36,8 +38,8 @@ const ThemedTitle = withTheme(
 );
 
 const Carousel: React.FC<{style?: ViewStyle}> = ({style}) => {
-  return <Card elevation={9} style={[{width: '100%'}, style]}>
-    <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+  return <Card elevation={9} style={[styles.carousel, style]}>
+    <Card.Cover source={{ uri: "https://picsum.photos/700" }} style={styles.carouselImage} />
     <ThemedTitle
       title="Card Title"
       subtitle="Card Subtitle"
@@ -48,13 +50,13 @@ const Carousel: React.FC<{style?: ViewStyle}> = ({style}) => {
 export const HomeScreen = withTheme(({ theme }) => {
   return (
     <>
-      <View style={styles.heroContainer}>
-        <Carousel />
+      <View style={[styles.heroContainer, {marginBottom: useResponsiveVal('gutter')}]}>
+        <Carousel style={{flexBasis: '100%'}} />
       </View>
       <View style={styles.heroContainer}>
-        <Carousel style={{width: '33%'}} />
-        <Carousel style={{width: '33%'}} />
-        <Carousel style={{width: '33%'}} />
+        <Carousel style={{flexBasis: '33%', marginRight: useResponsiveVal('gutter')}} />
+        <Carousel style={{flexBasis: '33%', marginRight: useResponsiveVal('gutter')}} />
+        <Carousel style={{flexBasis: '33%'}} />
       </View>
     </>
   );
@@ -67,10 +69,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   heroContainer: {
-    flex: 1,
+    // flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'stretch',
     justifyContent: 'space-between',
+  },
+  carousel: {
+    flex: 1,
+    height: styleVars.carouselHeight,
+  },
+  carouselImage: {
+    flex: 1,
+    height: styleVars.carouselHeight,
   },
   titleContainer: {
     position: "absolute",

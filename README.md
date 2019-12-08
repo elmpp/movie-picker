@@ -32,6 +32,8 @@ As you'll quickly notice have gone with a managed expo project here as time is o
 the essence and there's to be no funky low-level stuff. Also, honestly, it's
 a chance to see how expo's react-native-web integration has been going.
 
+> please note that mobile landscape mode responsive will not work currently due to this polyfill bug - https://tinyurl.com/st35upu **
+
 - git checkout -> `yarn install`
 - For mobile: `yarn start` (usual managed expo options then arise)
 - For web: `yarn web` (Perhaps play around with the browser window as it's responsive)

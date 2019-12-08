@@ -1,7 +1,9 @@
+import '@expo/match-media' // polyfill for media queries - https://tinyurl.com/qomrntv
+
 import * as React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import {ScreenContainer} from '../components/screens/screen-container'
-import { View, Text } from 'react-native';
+import {theme} from '../style/theme'
 
 
 type ExternalProps = any
@@ -14,12 +16,11 @@ export const withRoot = (options: Options = {}) => <OriginalProps extends {}>(
   Component: React.ComponentType<OriginalProps & InjectedProps>,
 ) => {
   const WithRootHOC: React.FC<OriginalProps & ExternalProps> = (...props) => {
-    return <PaperProvider {...options.reactNativePaperProps}>
+    return <PaperProvider theme={theme} {...options.reactNativePaperProps}>
       <ScreenContainer>
         <Component {...props} />
       </ScreenContainer>
     </PaperProvider>
-    return <Component {...props} />
   }
 
   if (process.env.NODE_ENV !== 'production') {

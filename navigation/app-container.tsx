@@ -15,7 +15,8 @@ import { Linking } from "expo";
 import { HomeScreen } from "../components/screens";
 import { DetailsScreen } from "../components/screens/details-screen";
 import { setNavigatorRef } from "./linking";
-import {DarkTheme} from 'react-native-paper'
+import {styleVars} from "../style";
+import { theme } from "../style/theme";
 
 const StackNavigator = createStackNavigator(
   // note the keys here should match the /pages/ filenames
@@ -23,13 +24,13 @@ const StackNavigator = createStackNavigator(
     home: {
       screen: HomeScreen,
       navigationOptions: {
-        title: 'Home',
+        title: "Discover"
       }
     },
     details: {
       screen: DetailsScreen,
       navigationOptions: {
-        title: 'Details',
+        title: "Details"
       }
     }
   },
@@ -38,29 +39,33 @@ const StackNavigator = createStackNavigator(
     initialRouteKey: "home",
     defaultNavigationOptions: {
       headerStyle: {
-        marginBottom: 5,
-      },
+        marginBottom: styleVars.gutter['sm'],
+      }
       // headerTintColor: '#fff',
       // headerTitleStyle: {
       //   fontWeight: 'bold',
       // },
     },
     navigationOptions: {
-      tabBarLabel: 'Home!',
+      tabBarLabel: "Home!"
     },
     cardStyle: {
       // marginTop: 5,
       // paddingHorizontal:
-    },
+    }
   }
 );
 
-const createApp = (routes: any) => createAppContainer(routes)
+const createApp = (routes: any) => createAppContainer(routes);
 
 const NavigatorAppContainer = createApp(StackNavigator);
 
 const prefix = Linking.makeUrl("/"); // syncs RN link scheme with expo
 
 export const AppContainer = () => (
-  <NavigatorAppContainer ref={ref => setNavigatorRef(ref)} uriPrefix={prefix} theme='dark' />
+  <NavigatorAppContainer
+    ref={ref => setNavigatorRef(ref)}
+    uriPrefix={prefix}
+    theme={theme.dark ? "dark" : "light"}
+  />
 );

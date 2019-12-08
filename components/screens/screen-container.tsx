@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
+    justifyContent: 'flex-start',
     // paddingHorizontal: 5,
     // marginHorizontal: 5,
   },
