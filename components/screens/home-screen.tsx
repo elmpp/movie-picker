@@ -3,11 +3,11 @@
  */
 
 import React from "react";
-import {DiscoverContainer} from '../container/discover-container'
+import {Discover} from '../presentational/discover'
 
 export const HomeScreen: React.FC = () => {
   return (
-    <DiscoverContainer />
+    <Discover />
   )
 }
 

@@ -1,8 +1,8 @@
+import React from 'react'
 import { styleVars } from "../../style";
 import { Card, withTheme } from "react-native-paper";
 import { ViewStyle, StyleSheet } from "react-native";
-import React from 'react'
-import { Movie } from "tmdb-typescript-api";
+import { TvShow, Movie } from "moviedb";
 
 const ThemedTitle = withTheme(({ theme, ...props }: any) => {
   const defaultProps = {
@@ -22,11 +22,11 @@ const ThemedTitle = withTheme(({ theme, ...props }: any) => {
   return <Card.Title {...defaultProps} {...props} />;
 });
 
-interface CarouselProps {
+export type CarouselProps<T> = {
   style?: ViewStyle
-  movies: Movie[]
+  media: T[]
 }
-export const Carousel: React.FC<CarouselProps> = ({ style, movies }) => {
+export const Carousel = <T extends Movie | TvShow>({style, media}: CarouselProps<T>) => {
   return (
     <Card elevation={9} style={[styles.carousel, style]}>
       <Card.Cover
