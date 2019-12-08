@@ -66,7 +66,7 @@ export const AppContainer = () => (
   <NavigatorAppContainer
     ref={ref => setNavigatorRef(ref)}
     uriPrefix={prefix}
-    // theme={theme.dark ? "dark" : "light"}
-    theme={theme.dark ? "light" : "light"}
+    theme={theme.dark ? "dark" : "light"}
+    // theme={theme.dark ? "light" : "light"}
   />
 );

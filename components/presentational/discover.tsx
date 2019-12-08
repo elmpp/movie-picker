@@ -5,11 +5,12 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { withTheme } from "react-native-paper";
-import { useResponsiveVal } from "../../lib/hooks/useResponsiveVal";
+import { useResponsiveVal } from "../../lib/hooks/use-responsive-val";
 import { Carousel, CarouselProps } from "./carousel";
 import { tmdb } from "../../lib/api/tmdb";
 import { MediaContainer } from "../container/media-container";
 import { Movie, TvShow, Callback} from "moviedb";
+import { styleVars } from "../../style";
 
 type DiscoverProps = ThemedProps<{}>;
 export const Discover = withTheme<DiscoverProps, {}>(({}) => {
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
   heroContainer: {
     flexDirection: "row",
     alignItems: "stretch",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    height: styleVars.carouselHeight,
   }
 });

@@ -1,58 +1,36 @@
-import React from 'react'
-import { styleVars } from "../../style";
-import { Card, withTheme } from "react-native-paper";
+/**
+ * Takes media and builds a carousel
+ *
+ *  - react-native-snap-carousel lib - https://tinyurl.com/rz3krg7
+ *  - carousel code example - https://tinyurl.com/vm72lmd
+ */
+import React, { useRef } from 'react'
 import { ViewStyle, StyleSheet } from "react-native";
-import { TvShow, Movie } from "moviedb";
+import SnapCarousel from 'react-native-snap-carousel'
+import {MediaCard} from './media-card'
+import {styleVars} from '../../style'
+import {useDimensions} from '../../lib/hooks/use-dimensions'
 
-const ThemedTitle = withTheme(({ theme, ...props }: any) => {
-  const defaultProps = {
-    style: styles.carouselTitleContainer,
-    titleStyle: {
-      ...theme.fonts.light,
-      fontSize: 14,
-      color: theme.colors.surface
-    },
-    subtitleStyle: {
-      ...theme.fonts.regular,
-      lineHeight: 24,
-      fontSize: 22,
-      color: theme.colors.surface
-    }
-  };
-  return <Card.Title {...defaultProps} {...props} />;
-});
+const renderItem = <T extends any>({item, index}: {item: T, index: number}) => {
+  return <MediaCard key={`carousel-${index}`} media={item} />
+}
 
 export type CarouselProps<T> = {
   style?: ViewStyle
   media: T[]
 }
-export const Carousel = <T extends Movie | TvShow>({style, media}: CarouselProps<T>) => {
-  return (
-    <Card elevation={9} style={[styles.carousel, style]}>
-      <Card.Cover
-        source={{ uri: "https://picsum.photos/700" }}
-        style={styles.carouselImage}
-      />
-      <ThemedTitle title="Card Title" subtitle="Card Subtitle" />
-    </Card>
-  );
+export const Carousel = <T extends any>({style, media}: CarouselProps<T>) => {
+  const carousel = useRef()
+  const dimensions = useDimensions()
+
+  return <SnapCarousel ref={c => {carousel.current = c}}
+  data={media}
+  renderItem={renderItem}
+  // sliderWidth={dimensions.width}
+  sliderWidth={400}
+  itemWidth={styleVars.carouselItemWidth}
+/>
 };
 
 const styles = StyleSheet.create({
-  carousel: {
-    flex: 1,
-    height: styleVars.carouselHeight
-  },
-  carouselImage: {
-    flex: 1,
-    height: styleVars.carouselHeight
-  },
-  carouselTitleContainer: {
-    position: "absolute",
-    backgroundColor: "transparent",
-    bottom: 10,
-    zIndex: 3,
-    left: 0,
-    right: 0
-  }
 });
