@@ -2,7 +2,7 @@
  * Vars and groupings to DRY the styles. "It ain't global styling", he says
  */
 import {BreakpointsUnion} from './breakpoints'
-import { useBreakpoints } from '../hooks/useBreakpoints'
+import { useBreakpoints } from '../lib/hooks/useBreakpoints'
 
 
 export const styleAux = {

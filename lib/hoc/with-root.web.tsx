@@ -2,8 +2,8 @@ import '@expo/match-media' // polyfill for media queries - https://tinyurl.com/q
 
 import * as React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import {ScreenContainer} from '../components/screens/screen-container'
-import {theme} from '../style/theme'
+import {ScreenContainer} from '../../components/screens/screen-container'
+import {theme} from '../../style/theme'
 
 
 type ExternalProps = any

@@ -1,6 +1,6 @@
 import React from 'react';
 import {DetailsScreen} from '../components/screens/details-screen'
-import {withRoot} from '../hoc/with-root'
+import {withRoot} from '../lib/hoc/with-root'
 
 const Details: React.FC = ({  }) => (
   <DetailsScreen />

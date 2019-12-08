@@ -1,4 +1,4 @@
 import {DarkTheme} from 'react-native-paper'
-import {augmentTheme} from './common'
+import {augmentTheme, Theme} from './common'
 
 export const theme = augmentTheme(DarkTheme)

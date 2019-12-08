@@ -1,4 +1,4 @@
-import {breakpoints, BreakpointsUnion} from '../style/breakpoints'
+import {breakpoints, BreakpointsUnion} from '../../style/breakpoints'
 import {useMediaQuery} from 'react-responsive'
 
 // @todo orientation queries

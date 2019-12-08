@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {Link, linker} from '../../navigation/linking'
+import {Link, linker} from '../../lib/navigation/linking'
 
 export const DetailsScreen: React.FC = () => {
   return (

@@ -12,11 +12,11 @@ import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { Linking } from "expo";
-import { HomeScreen } from "../components/screens";
-import { DetailsScreen } from "../components/screens/details-screen";
+import { HomeScreen } from "../../components/screens";
+import { DetailsScreen } from "../../components/screens/details-screen";
 import { setNavigatorRef } from "./linking";
-import {styleVars} from "../style";
-import { theme } from "../style/theme";
+import {styleVars} from "../../style";
+import { theme } from "../../style/theme";
 
 const StackNavigator = createStackNavigator(
   // note the keys here should match the /pages/ filenames
