@@ -6,6 +6,7 @@
  *  - react-navigation (RN) stackNavigator docs - https://tinyurl.com/von6vjg
  *  - react-navigation/web docs - https://tinyurl.com/v429f4l
  *  - react-navigation/web SSR example - https://tinyurl.com/yx2flg7o
+ *  - type checking RN setup - https://tinyurl.com/tybkejo
  */
 
 import React from "react";
@@ -18,17 +19,25 @@ import { setNavigatorRef } from "./linking";
 import {styleVars} from "../../style";
 import { theme } from "../../style/theme";
 
+
+export type RootParamList = {
+  home: undefined
+  details: { id: number }
+};
+
 const StackNavigator = createStackNavigator(
   // note the keys here should match the /pages/ filenames
   {
     home: {
       screen: HomeScreen,
+      path: '/',
       navigationOptions: {
         title: "Discover"
       }
     },
     details: {
       screen: DetailsScreen,
+      path: '/details/:id',
       navigationOptions: {
         title: "Details"
       }

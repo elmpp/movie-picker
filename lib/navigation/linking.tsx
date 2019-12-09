@@ -24,7 +24,7 @@ export const setNavigatorRef = navigatorRef => {
 
 export const linker: Linker = {
   navigate: ({routeName, params}) => {
-    console.log('routeName :', routeName);
+    // console.log('routeName :', routeName);
     _navigator.dispatch(
       NavigationActions.navigate({
         routeName,

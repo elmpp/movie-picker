@@ -7,7 +7,7 @@
  *  - 'MovieDB' package that does our work - https://tinyurl.com/uh3x3gh
  */
 
-import movieDbModule, { Callback, Movie } from 'moviedb'
+import movieDbModule, { Callback, Movie, TvShow } from 'moviedb'
 const movieDb = movieDbModule('0e7df4a59c9729d3a03fac42d76d7ff8')
 
 const genreMap = {
@@ -18,5 +18,5 @@ const genreMap = {
 export const tmdb = {
   discoverMovie: (category: keyof typeof genreMap, callback: Callback<Movie>) => movieDb.discoverMovie({with_genres: genreMap[category]}, callback), // api browser - https://tinyurl.com/y7f8ragw
   getPopularMovies: (callback: Callback<Movie>) => movieDb.miscPopularMovies(callback), // api browser - https://tinyurl.com/t4zvlon
-  getPopularTvs: (callback: Callback<Movie>) => movieDb.miscPopularTvs(callback), // api browser - https://tinyurl.com/rtj5yqb
+  getPopularTvs: (callback: Callback<TvShow>) => movieDb.miscPopularTvs(callback), // api browser - https://tinyurl.com/rtj5yqb
 }

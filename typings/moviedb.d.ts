@@ -43,6 +43,8 @@ declare module 'moviedb' {
 
   export type Callback<T> = (err?: Error, result?: Response<T>) => void
 
+  export type MediaUnion = Movie | TvShow
+
   // full api list here - https://tinyurl.com/rcpzvjz
   export type Client = {
     discoverMovie: (args: {with_genres: string}, Callback) => Response<Movie>

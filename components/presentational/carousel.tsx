@@ -12,25 +12,24 @@ import {styleVars} from '../../style'
 import {useDimensions} from '../../lib/hooks/use-dimensions'
 
 const renderItem = <T extends any>({item, index}: {item: T, index: number}) => {
-  return <MediaCard key={`carousel-${index}`} media={item} />
+  return <MediaCard<T> key={`carousel-${index}`} media={item} />
 }
 
 export type CarouselProps<T> = {
   style?: ViewStyle
   media: T[]
 }
-export const Carousel = <T extends any>({style, media}: CarouselProps<T>) => {
+export const Carousel = React.memo(<T extends any>({style, media}: CarouselProps<T>) => {
   const carousel = useRef()
   const dimensions = useDimensions()
 
   return <SnapCarousel ref={c => {carousel.current = c}}
   data={media}
   renderItem={renderItem}
-  // sliderWidth={dimensions.width}
-  sliderWidth={400}
+  sliderWidth={dimensions.width}
   itemWidth={styleVars.carouselItemWidth}
 />
-};
+});
 
 const styles = StyleSheet.create({
 });

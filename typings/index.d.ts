@@ -10,4 +10,6 @@ type DictionaryUnion<T, K extends string> = {
   [key in K]: T
 }
 
+type DeepPartial<T> = {[P in keyof T]?: DeepPartial<T[P]>}
+
 type ThemedProps<T> = {theme: import('../style/theme/common').Theme} & T
