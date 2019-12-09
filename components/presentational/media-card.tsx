@@ -4,13 +4,8 @@ import { Card, withTheme } from "react-native-paper";
 import { ViewStyle, StyleSheet } from "react-native";
 import { TvShow, Movie, MediaUnion } from "moviedb";
 import { linker } from '../../lib/navigation/linking';
+import {isMovie, isTvShow, getMediaType} from '../../lib/util/media-util'
 
-const isMovie = (media: any): media is Movie => {
-  return typeof media.original_title !== 'undefined'
-}
-const isTvShow = (media: any): media is TvShow => {
-  return typeof media.original_name !== 'undefined'
-}
 
 type ThemedTitleProps = ThemedProps<{
   media: MediaUnion
@@ -46,7 +41,7 @@ export type MediaCardProps<T> = {
 }
 export const MediaCard = <T extends MediaUnion>({style, media}: MediaCardProps<T>) => {
   const pressHandler = useCallback(
-    () => linker.navigate({routeName: 'details', params: {id: media.id}}),
+    () => linker.navigate({routeName: 'details', params: {id: media.id, mediaType: getMediaType(media)}}),
     [media],
   )
   return (

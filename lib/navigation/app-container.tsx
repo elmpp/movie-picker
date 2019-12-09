@@ -11,33 +11,36 @@
 
 import React from "react";
 import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
 import { Linking } from "expo";
 import { HomeScreen } from "../../components/screens";
 import { DetailsScreen } from "../../components/screens/details-screen";
 import { setNavigatorRef } from "./linking";
 import {styleVars} from "../../style";
 import { theme } from "../../style/theme";
+import { MediaTypeUnion } from "moviedb";
+import {reactNavigationScreenAdapter} from '../hoc/react-navigation-screen-adapter'
+import {routes} from './routes'
 
 
 export type RootParamList = {
   home: undefined
-  details: { id: number }
+  details: { id: number, mediaType: MediaTypeUnion }
 };
 
 const StackNavigator = createStackNavigator(
-  // note the keys here should match the /pages/ filenames
+  // note the keys here should match the dynamic /pages/ directory structure
   {
     home: {
-      screen: HomeScreen,
-      path: '/',
+      screen: reactNavigationScreenAdapter(HomeScreen),
+      path: routes.home.path,
       navigationOptions: {
         title: "Discover"
       }
     },
     details: {
-      screen: DetailsScreen,
-      path: '/details/:id',
+      screen: reactNavigationScreenAdapter(DetailsScreen),
+      path: routes.details.path,
       navigationOptions: {
         title: "Details"
       }

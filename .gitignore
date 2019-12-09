@@ -12,6 +12,7 @@ web-report/
 
 // --------- added by me ----
 yarn-error.log
+*.deleteable.*
 // --------- EOF added by me ----
 
 # macOS

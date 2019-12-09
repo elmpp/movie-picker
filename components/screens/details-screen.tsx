@@ -6,29 +6,30 @@
  * will need to mimic this prop for now
  */
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import {Link, linker} from '../../lib/navigation/linking'
-import { NavigationStackProp } from 'react-navigation-stack'
 import {RootParamList} from '../../lib/navigation/app-container'
+import {DetailsContainer} from '../container/details-container'
+import {ScreenParamProps} from '../../lib/hoc/react-navigation-screen-adapter'
 
-type DetailsScreenProps = {
-  navigation: NavigationStackProp<RootParamList['details']>
-}
-export const DetailsScreen: React.FC<DetailsScreenProps> = ({navigation}) => {
+export type DetailsScreenProps = ScreenParamProps<RootParamList['details'], {
+}>
+export const DetailsScreen: React.FC<DetailsScreenProps> = ({screenRouteParams}) => {
   return (
-    <View style={styles.container}>
-      <Text>THIS IS THE DETAILS SCREEN. Details id: {navigation.getParam('id')}</Text>
-      <Link routeName="home">jump to home screen via component</Link>
-      <Text onPress={() => linker.navigate({routeName: 'home'})}>jump to home screen imperatively</Text>
-    </View>
+    <DetailsContainer id={screenRouteParams.id} mediaType={screenRouteParams.mediaType} />
   );
+  // return (
+  //   <View style={styles.container}>
+  //     <Text>THIS IS THE DETAILS SCREEN. Details id: {navigation.getParam('id')}</Text>
+  //     <Link routeName="home">jump to home screen via component</Link>
+  //     <Text onPress={() => linker.navigate({routeName: 'home'})}>jump to home screen imperatively</Text>
+  //   </View>
+  // );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center"
+//   }
+// });

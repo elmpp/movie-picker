@@ -3,17 +3,18 @@
  * tmdb api endpoints
  */
 
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useState, useEffect } from "react";
-import { Response } from "moviedb";
+import { Response, SingularResponse, ResponseUnion, MediaUnion } from "moviedb";
 import { View, Text } from "react-native";
+import {isResponse, isSingularResponse} from '../../lib/util/media-util'
 
 type MediaContainerProps<T, U> = {
   cb: (...args: any) => Response<T>;
   Component: React.ComponentType<Omit<U, "media"> & { media: T[] }>;
   componentProps: Omit<U, "media">;
 };
-export const MediaContainer = <T, U>({
+export const MediaContainer = <T extends MediaUnion, U>({
   cb,
   Component,
   componentProps
@@ -22,16 +23,23 @@ export const MediaContainer = <T, U>({
   const [error, setError] = useState<string>();
   useEffect(() => {
     (async () => {
-      await cb((e?: Error, result?: Response<T>) => {
+      await cb((e?: Error, result?: ResponseUnion<T>) => {
         if (e) {
+          console.error(`Error found: ${e.message}`)
           setError(e.message)
         }
-        if (result) {
+        if (isResponse<T>(result)) {
+// const util = require('util')
+// console.debug('result.results', util.inspect(result, {showHidden: false, depth: undefined, colors: true}))
           setMedia(result.results)
+        }
+        if (isSingularResponse<T>(result)) {
+          setMedia([result])
         }
       })
       })();
   }, []);
+
 
   return (
     (error && (

@@ -1,7 +1,8 @@
 import { NavigationParams } from "react-navigation";
+import { RouteName } from "../routes";
 
 interface LinkableArgs {
-  routeName: string
+  routeName: RouteName
   params?: NavigationParams
 }
 export interface Linker {

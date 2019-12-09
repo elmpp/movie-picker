@@ -2,7 +2,6 @@
  * Webpack will bundle this over the sibling 'linking' module.
  * ! Current env context will be browser/node
  *
- *
  *  - nextjs linking docs - https://tinyurl.com/yyt38gqz
  */
 
@@ -10,17 +9,23 @@ import React from 'react'
 import NextLink, { LinkProps } from "next/link";
 import { Linker, LinkComponent } from "./__types__";
 import { NavigationParams } from 'react-navigation';
+import {routes, RouteName} from '../navigation/routes'
 
+/**
+ * @todo - use the npm history package instead of browser.history
+ */
 export const linker: Linker = {
   navigate: ({ routeName, params }) => {
-    console.log(buildUrl(routeName, params));
-    location.replace(buildUrl(routeName, params))
+    const newUrl = buildUrl(routeName, params)
+    history.pushState(null, null, newUrl)
+    window.history.go()
   }
 };
 
-// @todo use params for query params
-const buildUrl = (routeName: string, params?: NavigationParams) => {
-  return (routeName === 'home') ? '/' : `/${routeName}`
+const buildUrl = (routeName: RouteName, params?: NavigationParams) => {
+  return Object.keys(params).reduce((url: string, paramKey) => {
+    return url.replace(`:${paramKey}`, params[paramKey])
+  }, routes[routeName].path)
 }
 
 export const Link: LinkComponent<LinkProps> = ({

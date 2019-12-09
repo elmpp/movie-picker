@@ -10,6 +10,7 @@ import SnapCarousel from 'react-native-snap-carousel'
 import {MediaCard} from './media-card'
 import {styleVars} from '../../style'
 import {useDimensions} from '../../lib/hooks/use-dimensions'
+import { MediaUnion } from 'moviedb';
 
 const renderItem = <T extends any>({item, index}: {item: T, index: number}) => {
   return <MediaCard<T> key={`carousel-${index}`} media={item} />
@@ -19,7 +20,7 @@ export type CarouselProps<T> = {
   style?: ViewStyle
   media: T[]
 }
-export const Carousel = React.memo(<T extends any>({style, media}: CarouselProps<T>) => {
+export const Carousel = React.memo(<T extends MediaUnion>({style, media}: CarouselProps<T>) => {
   const carousel = useRef()
   const dimensions = useDimensions()
 

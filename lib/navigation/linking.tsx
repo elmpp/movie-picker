@@ -15,6 +15,7 @@ import {
 } from "react-navigation";
 import { Linker, LinkComponent } from './__types__';
 import { TextProps, Text } from "react-native";
+import { RouteName } from './routes';
 
 let _navigator: NavigationContainerComponent;
 
@@ -23,7 +24,7 @@ export const setNavigatorRef = navigatorRef => {
 };
 
 export const linker: Linker = {
-  navigate: ({routeName, params}) => {
+  navigate: ({routeName, params}: {routeName: RouteName, params?: object}) => {
     // console.log('routeName :', routeName);
     _navigator.dispatch(
       NavigationActions.navigate({

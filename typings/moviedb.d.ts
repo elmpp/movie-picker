@@ -40,16 +40,22 @@ declare module 'moviedb' {
     page: number
     results: T[]
   }
+  export type SingularResponse<T> = T
+  export type ResponseUnion<T> = Response<T> | SingularResponse<T>
 
   export type Callback<T> = (err?: Error, result?: Response<T>) => void
+  export type SingularCallback<T> = (err?: Error, result?: SingularResponse<T>) => void
 
   export type MediaUnion = Movie | TvShow
+  export type MediaTypeUnion = 'movie' | 'tv'
 
   // full api list here - https://tinyurl.com/rcpzvjz
   export type Client = {
     discoverMovie: (args: {with_genres: string}, Callback) => Response<Movie>
     miscPopularMovies: (Callback) => Response<Movie>
     miscPopularTvs: (Callback) => Response<TvShow>
+    movieInfo: (args: {id: number}, Callback) => Response<Movie>
+    tvInfo: (args: {id: number}, Callback) => Response<TvShow>
   }
   type Factory = (apiKey: string) => Client
 
