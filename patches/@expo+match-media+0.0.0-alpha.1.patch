@@ -1,14 +1,18 @@
 diff --git a/node_modules/@expo/match-media/build/polyfill.native.js b/node_modules/@expo/match-media/build/polyfill.native.js
-index 06d860d..560956e 100644
+index 06d860d..0399154 100644
 --- a/node_modules/@expo/match-media/build/polyfill.native.js
 +++ b/node_modules/@expo/match-media/build/polyfill.native.js
-@@ -5,18 +5,21 @@ class MediaQuery {
+@@ -1,19 +1,22 @@
+ import mediaQuery from "css-mediaquery";
+-import ScreenOrientation from "expo/build/ScreenOrientation/ScreenOrientation";
++import * as ScreenOrientation from "expo/build/ScreenOrientation/ScreenOrientation";
+ import { Dimensions } from "react-native";
+ class MediaQuery {
      constructor(query) {
          this.query = query;
          this.listeners = [];
--        this.orientation = ScreenOrientation.Orientation.PORTRAIT;
-+        // this.orientation = ScreenOrientation.Orientation.PORTRAIT;
-+        this.orientation = "PORTRAIT"
+         this.orientation = ScreenOrientation.Orientation.PORTRAIT;
++        // this.orientation = "PORTRAIT"
          this.resize = () => {
              this.updateListeners({ orientation: this.orientation });
          };
@@ -19,13 +23,7 @@ index 06d860d..560956e 100644
 +            const { orientation } = await Promise.resolve({orientation: "PORTRAIT"});
              this.updateListeners({ orientation });
          })();
--        this.unsubscribe = ScreenOrientation.addOrientationChangeListener(({ orientationInfo: { orientation } }) => {
--            this.updateListeners({ orientation });
--        });
-+        this.unsubscribe = () => {}
-+        // this.unsubscribe = ScreenOrientation.addOrientationChangeListener(({ orientationInfo: { orientation } }) => {
-+        //     this.updateListeners({ orientation });
-+        // });
-         Dimensions.addEventListener("change", this.resize);
-     }
-     _unmount() {
++        // this.unsubscribe = () => {}
+         this.unsubscribe = ScreenOrientation.addOrientationChangeListener(({ orientationInfo: { orientation } }) => {
+             this.updateListeners({ orientation });
+         });

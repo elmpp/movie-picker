@@ -7,11 +7,12 @@ interface BoxProps {
   style?: ViewStyle;
 }
 export const Box: React.FC<BoxProps> = ({ style, children }) => {
+  const marginBottom = useResponsiveVal("gutter")
   return (
     <View
       style={[
         styles.heroContainer,
-        { marginBottom: useResponsiveVal("gutter") }
+        { marginBottom }
       , style]}
     >{children}</View>
   );

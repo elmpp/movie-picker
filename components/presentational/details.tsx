@@ -8,10 +8,12 @@ import React, { useCallback } from "react";
 import { ViewStyle, StyleSheet, Image, Text, View } from "react-native";
 import { styleVars, styleAux } from "../../style";
 import { MediaUnion } from "moviedb";
-import { Card, withTheme, Paragraph } from "react-native-paper";
+import { Card, withTheme, Paragraph, FAB } from "react-native-paper";
 import { linker } from "../../lib/navigation/linking";
 import { getMediaType } from "../../lib/util/media-util";
 import { ThemedTitle } from "./themed-title";
+import { useResponsiveVal } from "../../lib/hooks/use-responsive-val";
+import {Platform} from 'react-native'
 
 type DetailsCardProps = ThemedProps<{
   style?: ViewStyle;
@@ -19,19 +21,22 @@ type DetailsCardProps = ThemedProps<{
 }>;
 const DetailsCard = withTheme(({ style, media, theme }: DetailsCardProps) => {
   const pressHandler = useCallback(
-    () =>
+    () => {
       linker.navigate({
-        routeName: "details",
+        routeName: "watch",
         params: { id: media.id, mediaType: getMediaType(media) }
-      }),
+      })
+    },
     [media]
   );
+  const margin = useResponsiveVal('gutter')
+
   return (
     <Card
       elevation={9}
       style={[
         {
-          margin: styleAux.responsiveVal("gutter"),
+          margin,
           backgroundColor: styleAux.addOpacity(theme.colors.surface, 0.8)
         },
         styles.detailsCard,
@@ -39,9 +44,20 @@ const DetailsCard = withTheme(({ style, media, theme }: DetailsCardProps) => {
       ]}
       onPress={pressHandler}
     >
-      <Card.Content>
+      {Platform.OS !== 'web' && <FAB
+        style={styles.fab}
+        small
+        icon="plus"
+        label="Watch"
+        onPress={pressHandler}
+      />}
+      <Card.Content style={{paddingTop: margin}}>
         <ThemedTitle media={media} titleOnly />
-        <Paragraph style={{paddingHorizontal: styleAux.responsiveVal('gutter') + 5}}>{media.overview}</Paragraph>
+        <Paragraph
+          style={{ paddingHorizontal: margin + 5 }}
+        >
+          {media.overview}
+        </Paragraph>
       </Card.Content>
     </Card>
   );
@@ -75,6 +91,12 @@ const styles = StyleSheet.create({
   detailsCard: {
     flex: 1,
     height: styleVars.carouselHeight,
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
+  fab: {
+    width: 100,
+    position: 'absolute',
+    right: 25,
+    top: -20,
+  },
 });

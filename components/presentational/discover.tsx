@@ -11,7 +11,8 @@ import { MediaContainer } from "../container/media-container";
 import { Movie, TvShow, Callback } from "moviedb";
 import { Box } from "./box";
 import { ScrollView } from "react-native-gesture-handler";
-import { styleVars, styleAux } from "../../style";
+import { styleVars } from "../../style";
+import { useResponsiveVal } from "../../lib/hooks/use-responsive-val";
 
 type DiscoverProps = ThemedProps<{}>;
 export const Discover = withTheme<DiscoverProps, {}>(({}) => {
@@ -28,8 +29,9 @@ export const Discover = withTheme<DiscoverProps, {}>(({}) => {
     (cb: Callback<Movie>) => ReturnType<typeof tmdb.discoverMovie>
   >(cb => tmdb.discoverMovie("Documentary", cb), []);
 
+  const margin = useResponsiveVal('gutter')
   const carouselProps = Platform.select({
-    web: {offset: styleVars.carouselItemWidth / 2, tileMargin: styleAux.responsiveVal('gutter')},
+    web: {offset: styleVars.carouselItemWidth / 2, tileMargin: margin},
     default: {offset: 0, tileMargin: 0},
   });
 
@@ -39,28 +41,28 @@ export const Discover = withTheme<DiscoverProps, {}>(({}) => {
         <MediaContainer<Movie, CarouselProps<Movie>>
           cb={popularMoviesMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin }}
+          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin, genre: 'popular_movie' }}
         />
       </Box>
       <Box>
         <MediaContainer<TvShow, CarouselProps<TvShow>>
           cb={popularTvsMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" }, ...carouselProps }}
+          componentProps={{ style: { flexBasis: "100%" }, ...carouselProps, genre: 'popular_tv' }}
         />
       </Box>
       <Box>
         <MediaContainer<Movie, CarouselProps<Movie>>
           cb={genreFamilyMoviesMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" } }}
+          componentProps={{ style: { flexBasis: "100%" }, genre: 'family' }}
         />
       </Box>
       <Box>
         <MediaContainer<Movie, CarouselProps<Movie>>
           cb={genreDocumentaryMoviesMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin }}
+          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin, genre: 'documentary' }}
         />
       </Box>
     </ScrollView>

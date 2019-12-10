@@ -18,6 +18,8 @@ declare module 'moviedb' {
     vote_count: number
     video: boolean
     vote_average: number
+    // monkeypatched properties...
+    genre?: GenreUnion
   }
 
   export interface TvShow {
@@ -34,6 +36,8 @@ declare module 'moviedb' {
     original_language: string
     vote_count: number
     first_air_date: Date
+    // monkeypatched properties...
+    genre?: GenreUnion
   }
 
   export type Response<T> = {
@@ -48,6 +52,8 @@ declare module 'moviedb' {
 
   export type MediaUnion = Movie | TvShow
   export type MediaTypeUnion = 'movie' | 'tv'
+
+  export type GenreUnion = 'popular_movie' | 'popular_tv' | 'family' | 'documentary'
 
   // full api list here - https://tinyurl.com/rcpzvjz
   export type Client = {

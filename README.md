@@ -32,12 +32,18 @@ As you'll quickly notice have gone with a managed expo project here as time is o
 the essence and there's to be no funky low-level stuff. Also, honestly, it's
 a chance to see how expo's react-native-web integration has been going.
 
-> please note that mobile landscape mode responsive will not work currently due to this polyfill bug - https://tinyurl.com/st35upu **
 
 - git checkout -> `yarn install`
 - For mobile: `yarn start` (usual managed expo options then arise)
 - For web: `yarn web` (Perhaps play around with the browser window as it's responsive)
 
+## 🏁 Notes
+ - there are some warnings around performance when using the carousel. This is probably due
+ to the use of a containing ScrollView and would probs try FlatList with more time
+ - I've removed the ability on Web to play the video as that looked a little gnarly right now
+ - in retrospect, shouldn't have tackled web platform given the time and included a search
+ feature. On the plus side it's waaay easier than in the past
+ - i haven't tested on ios due to current machine not being set up yet
 
 ## 🏁 Libraries <a name = "libraries"></a>
 

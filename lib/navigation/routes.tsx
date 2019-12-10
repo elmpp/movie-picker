@@ -10,5 +10,8 @@ export const routes = {
   },
   details: {
     path: '/details/:id/:mediaType',
-  }
+  },
+  watch: {
+    path: '/watch/:id/:mediaType',
+  },
 }

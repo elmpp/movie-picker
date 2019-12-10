@@ -1,4 +1,5 @@
 /// <reference path="./moviedb.d.ts" />
+/// <reference path="./expo-av.d.ts" />
 
 
 

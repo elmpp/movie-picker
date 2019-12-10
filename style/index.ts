@@ -10,7 +10,8 @@ import Color from 'color'
 
 
 export const styleAux = {
-  responsiveVal: (key: keyof typeof scales) => scales[key][useBreakpoints()],
+  // responsiveVal: (key: keyof typeof scales) => scales[key][useBreakpoints()],
+  responsiveVal: (key: keyof typeof scales) => scales[key]['lg'], // @todo - really annoying hook-related bug here
   addOpacity: (color: string, opacity = styleVars.opacityLevel): string => Color(color).alpha(opacity).string(),
   positionBottom: {
     position: 'absolute',

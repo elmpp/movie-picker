@@ -1,9 +1,34 @@
+/**
+ *  - ionicon definitions - https://tinyurl.com/y9zhnw97
+ */
 import React from 'react'
 import { withTheme, Card } from 'react-native-paper';
-import { MediaUnion } from 'moviedb';
+import { MediaUnion, GenreUnion } from 'moviedb';
 import { isTvShow, isMovie } from '../../lib/util/media-util';
 import { styleAux } from '../../style';
 import { ViewStyle, TextStyle } from 'react-native';
+import {Ionicons as Icons} from '@expo/vector-icons'
+
+
+
+type GenreIconProps = ThemedProps<{ media: MediaUnion }>
+export const GenreIcon = withTheme(({ media, theme }: GenreIconProps) => {
+  const styles = {
+    top: 30,
+    right: 10,
+    color: theme.colors.onSurface,
+    height: 70,
+    fontWeight: 600,
+  }
+
+  const genreMap: DictionaryUnion<string, GenreUnion> = {popular_movie: 'ios-trending-up', popular_tv: 'ios-trending-up', family: 'ios-contacts', documentary: 'ios-document'}
+
+  return (
+    <Icons size={30} name={genreMap[media.genre]} style={styles} />
+  )
+})
+
+
 
 type ThemedTitleProps = ThemedProps<{
   style?: ViewStyle,
@@ -32,16 +57,16 @@ export const ThemedTitle = withTheme(({ theme, media, style: defaultStyle, title
 
   if (titleOnly) {
     if (isMovie(media)) {
-      return <Card.Title {...defaultProps} style={style} titleStyle={defaultProps.subtitleStyle} {...props} title={media.title} />;
+      return <Card.Title right={() => <GenreIcon media={media} />} {...defaultProps} titleStyle={defaultProps.subtitleStyle} {...props} title={media.title} />;
     }
     if (isTvShow(media)) {
-      return <Card.Title {...defaultProps} style={style} titleStyle={defaultProps.subtitleStyle} {...props} title={media.name} />;
+      return <Card.Title right={() => <GenreIcon media={media} />} {...defaultProps} titleStyle={defaultProps.subtitleStyle} {...props} title={media.name} />;
     }
   }
   if (isMovie(media)) {
-    return <Card.Title {...defaultProps} {...props} style={style} title={media.overview} subtitle={media.title} />;
+    return <Card.Title right={() => <GenreIcon media={media} />} {...defaultProps} {...props} style={style} title={media.overview} subtitle={media.title} />;
   }
   if (isTvShow(media)) {
-    return <Card.Title {...defaultProps} {...props} style={style} title={media.overview} subtitle={media.name} />;
+    return <Card.Title  right={() => <GenreIcon media={media} />} {...defaultProps} {...props} style={style} title={media.overview} subtitle={media.name} />;
   }
 });

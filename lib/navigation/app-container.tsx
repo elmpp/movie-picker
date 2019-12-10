@@ -11,10 +11,11 @@
 
 import React from "react";
 import { createAppContainer } from "react-navigation";
-import { createStackNavigator, NavigationStackProp } from "react-navigation-stack";
+import { createStackNavigator} from "react-navigation-stack";
 import { Linking } from "expo";
 import { HomeScreen } from "../../components/screens";
 import { DetailsScreen } from "../../components/screens/details-screen";
+import { WatchScreen } from "../../components/screens/watch-screen";
 import { setNavigatorRef } from "./linking";
 import {styleVars} from "../../style";
 import { theme } from "../../style/theme";
@@ -45,7 +46,15 @@ const StackNavigator = createStackNavigator(
         title: "Details",
         headerTransparent: true,
       }
-    }
+    },
+    watch: {
+      screen: reactNavigationScreenAdapter(WatchScreen),
+      path: routes.watch.path,
+      navigationOptions: {
+        title: "Watch",
+        headerTransparent: true,
+      }
+    },
   },
   // stackNavigator options - https://tinyurl.com/wtnmho3
   {
@@ -80,6 +89,5 @@ export const AppContainer = () => (
     ref={ref => setNavigatorRef(ref)}
     uriPrefix={prefix}
     theme={theme.dark ? "dark" : "light"}
-    // theme={theme.dark ? "light" : "light"}
   />
 );

@@ -12,7 +12,7 @@ export type MediaCardProps<T> = {
   style?: ViewStyle
   media: T
 }
-export const MediaCard = <T extends MediaUnion>({style, media}: MediaCardProps<T>) => {
+export const MediaCard = React.memo(<T extends MediaUnion>({style, media}: MediaCardProps<T>) => {
   const pressHandler = useCallback(
     () => linker.navigate({routeName: 'details', params: {id: media.id, mediaType: getMediaType(media)}}),
     [media],
@@ -26,7 +26,7 @@ export const MediaCard = <T extends MediaUnion>({style, media}: MediaCardProps<T
         <ThemedTitle media={media} style={styles.titleBar} />
       </Card>
   );
-};
+});
 
 const styles = StyleSheet.create({
   mediaCard: {

@@ -12,7 +12,6 @@ const Details: NextPage<DetailsScreenProps, {}> = ({ screenRouteParams }) => (
   <DetailsScreen screenRouteParams={screenRouteParams} />
 )
 Details.getInitialProps = async ({query}) => {
-  console.log('router.query :', query);
   return {
     screenRouteParams: query,
   }
