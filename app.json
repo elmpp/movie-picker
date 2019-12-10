@@ -3,6 +3,7 @@
     "name": "Movie Picker",
     "slug": "movie-picker",
     "privacy": "public",
+    "scheme": "moviepicker",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",

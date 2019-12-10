@@ -42,7 +42,8 @@ const StackNavigator = createStackNavigator(
       screen: reactNavigationScreenAdapter(DetailsScreen),
       path: routes.details.path,
       navigationOptions: {
-        title: "Details"
+        title: "Details",
+        headerTransparent: true,
       }
     }
   },
@@ -52,7 +53,7 @@ const StackNavigator = createStackNavigator(
     defaultNavigationOptions: {
       headerStyle: {
         marginBottom: styleVars.gutter['sm'],
-      }
+      },
       // headerTintColor: '#fff',
       // headerTitleStyle: {
       //   fontWeight: 'bold',

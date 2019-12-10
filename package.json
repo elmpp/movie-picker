@@ -7,13 +7,14 @@
     "web": "next dev",
     "web-expo": "expo start --web",
     "eject": "expo eject",
-    "patch-package-refresh": "npx patch-package @expo/match-media",
+    "patch-package-refresh": "npx patch-package @expo/match-media hammerjs",
     "prepare": "patch-package"
   },
   "dependencies": {
     "@expo/match-media": "^0.0.0-alpha.1",
     "@expo/next-adapter": "^2.0.0-beta.8",
     "@react-navigation/web": "^1.0.0-alpha.9",
+    "color": "^3.1.2",
     "expo": "^36.0.0",
     "moviedb": "^0.2.10",
     "next": "^9.1.4",
@@ -36,9 +37,13 @@
     "tmdb-typescript-api": "^0.0.5"
   },
   "devDependencies": {
+    "@types/color": "^3.0.0",
     "@types/react": "^16.8.23",
     "@types/react-native": "^0.57.65",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-expo": "^7.1.0",
+    "empty-module": "^0.0.2",
+    "null-loader": "^3.0.0",
     "typescript": "^3.6.3"
   },
   "private": true
