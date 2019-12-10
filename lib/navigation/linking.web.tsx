@@ -16,13 +16,13 @@ import {routes, RouteName} from '../navigation/routes'
  */
 export const linker: Linker = {
   navigate: ({ routeName, params }) => {
-    const newUrl = buildUrl(routeName, params)
+    const newUrl = buildUrl(routes, routeName, params)
     history.pushState(null, null, newUrl)
     window.history.go()
   }
 };
 
-const buildUrl = (routeName: RouteName, params?: NavigationParams) => {
+export const buildUrl = (routes, routeName: RouteName, params?: NavigationParams) => {
   return Object.keys(params).reduce((url: string, paramKey) => {
     return url.replace(`:${paramKey}`, params[paramKey])
   }, routes[routeName].path)
@@ -33,4 +33,4 @@ export const Link: LinkComponent<LinkProps> = ({
   routeName,
   params,
   ...otherProps
-}) => <NextLink href={buildUrl(routeName, params)} {...otherProps}><a>{children}</a></NextLink>;
+}) => <NextLink href={buildUrl(routes, routeName, params)} {...otherProps}><a>{children}</a></NextLink>;

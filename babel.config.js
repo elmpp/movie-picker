@@ -4,10 +4,22 @@
  */
 
 module.exports = {
-  presets: ['@expo/next-adapter/babel'],
+  presets: ["@expo/next-adapter/babel"],
   env: {
     production: {
-      plugins: ['react-native-paper/babel'],
+      plugins: ["react-native-paper/babel"]
     },
-  },
+    test: {
+      presets: [
+        [
+          "@babel/env",
+          {
+            modules: "commonjs",
+            useBuiltIns: "usage",
+            debug: false
+          }
+        ],
+      ]
+    }
+  }
 };
