@@ -29,7 +29,7 @@ export const withRoot = (options: Options = {}) => <OriginalProps extends {}>(
         const pageProps = await Component.getInitialProps(ctx);
         return { ...pageProps }
       }
-      return {}
+      return {reactNativePaperProps: {}}
     }
 
     render() {

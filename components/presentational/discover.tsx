@@ -3,14 +3,15 @@
  */
 
 import React, { useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import { withTheme } from "react-native-paper";
 import { Carousel, CarouselProps } from "./carousel";
 import { tmdb } from "../../lib/api/tmdb";
 import { MediaContainer } from "../container/media-container";
 import { Movie, TvShow, Callback } from "moviedb";
-import {Box} from './box'
+import { Box } from "./box";
 import { ScrollView } from "react-native-gesture-handler";
+import { styleVars, styleAux } from "../../style";
 
 type DiscoverProps = ThemedProps<{}>;
 export const Discover = withTheme<DiscoverProps, {}>(({}) => {
@@ -27,20 +28,25 @@ export const Discover = withTheme<DiscoverProps, {}>(({}) => {
     (cb: Callback<Movie>) => ReturnType<typeof tmdb.discoverMovie>
   >(cb => tmdb.discoverMovie("Documentary", cb), []);
 
+  const carouselProps = Platform.select({
+    web: {offset: styleVars.carouselItemWidth / 2, tileMargin: styleAux.responsiveVal('gutter')},
+    default: {offset: 0, tileMargin: 0},
+  });
+
   return (
     <ScrollView>
       <Box>
         <MediaContainer<Movie, CarouselProps<Movie>>
           cb={popularMoviesMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" } }}
+          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin }}
         />
       </Box>
       <Box>
         <MediaContainer<TvShow, CarouselProps<TvShow>>
           cb={popularTvsMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" } }}
+          componentProps={{ style: { flexBasis: "100%" }, ...carouselProps }}
         />
       </Box>
       <Box>
@@ -54,12 +60,10 @@ export const Discover = withTheme<DiscoverProps, {}>(({}) => {
         <MediaContainer<Movie, CarouselProps<Movie>>
           cb={genreDocumentaryMoviesMemoized}
           Component={Carousel}
-          componentProps={{ style: { flexBasis: "100%" } }}
+          componentProps={{ style: { flexBasis: "100%" }, tileMargin: carouselProps.tileMargin }}
         />
       </Box>
     </ScrollView>
   );
 });
 
-const styles = StyleSheet.create({
-});

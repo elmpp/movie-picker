@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import {Surface} from 'react-native-paper'
 
 interface ScreenContainerProps {}
@@ -16,14 +16,16 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: 1200,
     paddingHorizontal: 5,
+    marginHorizontal: 'auto',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   surface: {
-    flex: 1,
-  },
-  surfaceContainer: {
-    backgroundColor: 'green',
     flex: 1,
   },
 })

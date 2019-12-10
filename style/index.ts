@@ -27,13 +27,13 @@ type Scales = DictionaryUnion<DictionaryUnion<number, BreakpointsUnion>, 'gutter
 const scales: Scales = {
   gutter: {
     sm: 10,
-    lg: 15,
+    lg: 5,
   },
 }
 
 interface StyleVars extends Scales {
   carouselHeight: number,
-  carouselItemWidth: number | string,
+  carouselItemWidth: number,
   opacityLevel: number,
 }
 export const styleVars: StyleVars = {

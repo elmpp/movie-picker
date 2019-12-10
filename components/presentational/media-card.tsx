@@ -17,7 +17,7 @@ export const MediaCard = <T extends MediaUnion>({style, media}: MediaCardProps<T
     () => linker.navigate({routeName: 'details', params: {id: media.id, mediaType: getMediaType(media)}}),
     [media],
   )
-  return (
+  return media.poster_path && (
       <Card elevation={9} style={[styles.mediaCard, style]} onPress={pressHandler}>
         <Card.Cover
           source={{ uri: `http://image.tmdb.org/t/p/w342/${media.poster_path}` }}
