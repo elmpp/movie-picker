@@ -26,6 +26,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Simple movie browsing app built as a test for a job in NL",
+    "githubUrl": "https://github.com/elmpp/movie-picker"
   }
 }
