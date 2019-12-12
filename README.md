@@ -37,7 +37,7 @@ a chance to see how expo's react-native-web integration has been going.
 - For mobile: `yarn start` (usual managed expo options then arise)
 - For web: `yarn web` (Perhaps play around with the browser window as it's responsive)
 
-> It's available through expo's app directory here - https://expo.io/@trousered/movie-picker
+__It's available through expo's app directory here - https://expo.io/@trousered/movie-picker__
 
 ## 🏁 Notes
  - there are some warnings around performance when using the carousel. This is probably due
@@ -46,7 +46,6 @@ a chance to see how expo's react-native-web integration has been going.
  - in retrospect, shouldn't have tackled web platform given the time and included a search
  feature. On the plus side it's waaay easier than in the past
  - i haven't tested on ios due to current machine not being set up yet
- - i haven't actually written any unit tests - i've run out of time and s
 
 ## 🏁 Libraries <a name = "libraries"></a>
 
